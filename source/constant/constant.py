@@ -13,6 +13,11 @@ DATABASE_NAME = "car_sales"
 
 # Data Ingestion Constants
 
-TRAIN_DI_COLLECTION_NAME = 'car_dataset'
-DI_DIR_NAME = 'data_ingestion'
+TRAIN_DI_COLLECTION_NAME = "car_dataset"
+DI_DIR_NAME = "data_ingestion"
 DI_FEATURE_STORE_DIR = "feature_store"
+DI_INGESTED_DIR = 'ingested'
+DI_TRAIN_TEST_SPLIT_RATIO = 0.2
+DI_COL_DROP_IN_CLEAN = ['name']
+
+
