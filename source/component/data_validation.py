@@ -25,6 +25,8 @@ class DataValidation:
                 imputation_values = pd.concat([numerical_imputation_values, categorical_imputation_values])
                 imputation_values.to_csv(self.utility_config.imputation_values_file_name, header=['imputation_value'])
 
+                return data
+
             if key in ['test', 'predict']:
 
                 imputation_values = pd.read_csv(self.utility_config.imputation_values_file_name, index_col=0)['imputation_value']
