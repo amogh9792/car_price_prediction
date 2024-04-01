@@ -27,4 +27,13 @@ class PipelineConfig:
         self.database_name = constant.DATABASE_NAME
         self.train_collection_name = constant.TRAIN_DI_COLLECTION_NAME
 
+        # Data Validation
+        self.imputation_values_file_name = constant.DV_IMPUTATION_VALUES_FILE_NAME
+        self.outlier_params_file = constant.DV_OUTLIER_PARAMS_FILE
+        self.train_dv_imputation_values_file_name = constant.DV_IMPUTATION_VALUES_FILE_NAME
+
+        self.train_dv_train_file_path = os.path.join(self.artifact_dir, self.train_pipeline, constant.DV_DIR_NAME)
+        self.train_dv_test_file_path = os.path.join(self.artifact_dir, self.train_pipeline, constant.DV_DIR_NAME)
+
+
 

@@ -39,6 +39,19 @@ class DataIngestion:
         except CustomException as e:
             raise e
 
+    def split_data_test_train(self, data: DataFrame):
+        try:
+
+            logging.info("Start: train, test split data")
+
+            train_set, test_set = train_test_split(data, test_size = self.utility_config.train_test_split_ratio, random_state = 42)
+
+            logging.info("Complete: Train test Split")
+
+            return train_set, test_set
+
+        except CustomException as e:
+            raise e
 
     def initiate_data_ingestion(self, key):
 
@@ -47,6 +60,12 @@ class DataIngestion:
             logging.info("Start: Data Ingestion")
 
             data = self.export_data_into_feature_store(key)
+
+            if key == 'train':
+
+                train_data, test_data = self.split_data_test_train(data)
+                export_data_csv(train_data, self.utility_config.train_file_name, self.utility_config.train_di_train_file_path)
+                export_data_csv(test_data, self.utility_config.test_file_name,self.utility_config.train_di_test_file_path)
 
             logging.info("Complete: Data Ingestion")
         except CustomException as e:
