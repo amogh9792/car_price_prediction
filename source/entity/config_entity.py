@@ -27,6 +27,10 @@ class PipelineConfig:
         self.database_name = constant.DATABASE_NAME
         self.train_collection_name = constant.TRAIN_DI_COLLECTION_NAME
 
+        self.di_col_drop_in_clean = constant.DI_COL_DROP_IN_CLEAN
+        self.mandatory_col_list = constant.MANDATORY_COL_LIST
+        self.mandatory_col_data_type = constant.MANDATORY_COL_DATA_TYPE
+
         # Data Validation
         self.imputation_values_file_name = constant.DV_IMPUTATION_VALUES_FILE_NAME
         self.outlier_params_file = constant.DV_OUTLIER_PARAMS_FILE
@@ -34,6 +38,16 @@ class PipelineConfig:
 
         self.train_dv_train_file_path = os.path.join(self.artifact_dir, self.train_pipeline, constant.DV_DIR_NAME)
         self.train_dv_test_file_path = os.path.join(self.artifact_dir, self.train_pipeline, constant.DV_DIR_NAME)
+
+        # Data Transformation
+
+        self.dt_binary_class_col = constant.DT_BINARY_CLASS_COL
+        self.dt_multi_class_col = constant.DT_MULTI_CLASS_COL
+        self.dt_multi_class_encoder = constant.DT_ENCODER_PATH
+        self.train_dt_train_file_path = os.path.join(self.artifact_dir, self.train_pipeline, constant.DT_DIR_NAME)
+        self.train_dt_test_file_path = os.path.join(self.artifact_dir, self.train_pipeline, constant.DT_DIR_NAME)
+
+
 
 
 

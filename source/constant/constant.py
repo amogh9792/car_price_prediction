@@ -20,12 +20,38 @@ DI_INGESTED_DIR = 'ingested'
 DI_TRAIN_TEST_SPLIT_RATIO = 0.2
 DI_COL_DROP_IN_CLEAN = ['name', '_id']
 
+MANDATORY_COL_LIST = ['year', 'selling_price', 'km_driven', 'fuel', 'seller_type', 'transmission', 'owner', 'mileage(km/ltr/kg)', 'engine', 'max_power', 'seats']
+MANDATORY_COL_DATA_TYPE = {
+    'year': 'int64',
+    'selling_price': 'int64',
+    'km_driven': 'int64',
+    'fuel': 'object',
+    'seller_type': 'object',
+    'transmission': 'object',
+    'owner': 'object',
+    'mileage(km/ltr/kg)': 'float64',
+    'engine': 'int64',
+    'max_power': 'float64',
+    'seats': 'int64'
+}
 # Data Validation Constant
 
 DV_IMPUTATION_VALUES_FILE_NAME = "source/ml/imputation_values.csv"
 
 DV_OUTLIER_PARAMS_FILE = 'source/ml/outlier_details.csv'
 DV_DIR_NAME = "data_validation"
+
+# Data Transformation Constant
+
+DT_MULTI_CLASS_COL = ['year', 'km_driven', 'fuel', 'seller_type', 'owner', 'mileage(km/ltr/kg)', 'engine', 'max_power', 'seats']
+DT_BINARY_CLASS_COL = ['transmission']
+DT_ENCODER_PATH = "source/ml/multi_class_encoder.pkl"
+DT_DIR_NAME = "data_transformation"
+MP_DIR_NAME = "model_prediction"
+
+
+
+
 
 
 

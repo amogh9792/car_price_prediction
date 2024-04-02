@@ -53,6 +53,64 @@ class DataIngestion:
         except CustomException as e:
             raise e
 
+    def clean_data(self, data, key):
+        try:
+            logging.info("Start: clean data")
+
+            if key == 'train':
+                data = data.drop_duplicates()
+
+                data = data.loc[:, data.nunique() > 1]
+
+                drop_column = []
+
+                for col in data.select_dtypes(include = ['object']).columns:
+                    unique_count = data[col].nunique()
+
+                    if unique_count / len(data) > 0.5:
+                        data.drop(col, axis = 1, inplace = True)
+                        drop_column.append(col)
+
+                logging.info(f"dropped columns : {drop_column}")
+
+                logging.info("Complete: clean data")
+
+            return data
+
+
+        except CustomException as e:
+            raise e
+
+    def process_data(self, data, key):
+        logging.info("Start: Processing the data")
+
+        if key == "train":
+            mandatory_cols = self.utility_config.mandatory_col_list.copy()
+
+        if key in ['test', 'predict']:
+            mandatory_cols = self.utility_config.mandatory_col_list.copy()
+            mandatory_cols.remove('selling_price')
+
+            data = data.drop(self.utility_config.di_col_drop_in_clean, axis=1)
+
+        for col in mandatory_cols:
+            if col not in data.columns:
+                raise CustomException(f"missing mandatory column: {col}")
+
+            if data[col].dtype != self.utility_config.mandatory_col_data_type[col]:
+                try:
+                    # Handle converting string values to float
+                    data[col] = pd.to_numeric(data[col], errors='coerce')
+
+                except ValueError as e:
+                    raise CustomException(f"ERROR: Converting data type for column: {col}")
+
+        data = data[mandatory_cols]
+
+        logging.info("Complete: Process data")
+
+        return data
+
     def initiate_data_ingestion(self, key):
 
         try:
@@ -60,6 +118,8 @@ class DataIngestion:
             logging.info("Start: Data Ingestion")
 
             data = self.export_data_into_feature_store(key)
+            data = self.process_data(data, key)
+            data = self.clean_data(data, key)
 
             if key == 'train':
 

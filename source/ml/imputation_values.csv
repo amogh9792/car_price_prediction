@@ -1,13 +1,11 @@
 ,imputation_value
-year,2015.0
-selling_price,450000.0
-km_driven,60000.0
-mileage(km/ltr/kg),19.3
+year,2014.0
+selling_price,400000.0
+km_driven,70000.0
+mileage(km/ltr/kg),19.4
 engine,1248.0
-max_power,82.0
+max_power,81.83
 seats,5.0
-_id,66069339dd983b96448a3f73
-name,Maruti Swift Dzire VDI
 fuel,Diesel
 seller_type,Individual
 transmission,Manual

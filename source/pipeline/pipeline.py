@@ -15,7 +15,6 @@ class DataPipeline:
         data_validation_obj = DataValidation(self.utility_config)
         data_validation_obj.initiate_data_validation(key)
 
-
     def run_train_pipeline(self):
         self.start_data_ingestion('train')
         self.start_data_validation('train')
