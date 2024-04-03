@@ -20,8 +20,8 @@ DI_INGESTED_DIR = 'ingested'
 DI_TRAIN_TEST_SPLIT_RATIO = 0.2
 DI_COL_DROP_IN_CLEAN = ['name', '_id']
 
-MANDATORY_COL_LIST = ['year', 'selling_price', 'km_driven', 'fuel', 'seller_type', 'transmission', 'owner', 'mileage(km/ltr/kg)', 'engine', 'max_power', 'seats']
-MANDATORY_COL_DATA_TYPE = {
+DI_MANDATORY_COLUMN_LIST = ['year', 'selling_price', 'km_driven', 'fuel', 'seller_type', 'transmission', 'owner', 'mileage(km/ltr/kg)', 'engine', 'max_power', 'seats']
+DI_MANDATORY_COLUMN_DATA_TYPE = {
     'year': 'int64',
     'selling_price': 'int64',
     'km_driven': 'int64',
@@ -48,6 +48,17 @@ DT_BINARY_CLASS_COL = ['transmission']
 DT_ENCODER_PATH = "source/ml/multi_class_encoder.pkl"
 DT_DIR_NAME = "data_transformation"
 MP_DIR_NAME = "model_prediction"
+
+# Model train & evaluate
+MODEL_PATH = "source/ml/artifact"
+FINAL_MODEL_PATH = "source/ml/final_model"
+
+# Prediction constant
+PREDICT_PIPELINE_NAME = 'predict'
+PREDICT_DATA_FILE_NAME = 'predict_data.csv'
+PREDICT_FILE = 'predict.csv'
+
+FINAL_MODEL_FILE_NAME = 'CatBoostRegressor.pkl'
 
 
 

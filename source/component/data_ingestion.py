@@ -17,7 +17,7 @@ class DataIngestion:
 
             if key == 'train':
                 collection_name = self.utility_config.train_collection_name
-                feature_store_file_path = self.utility_config.train_feature_store_file_path
+                feature_store_file_path = self.utility_config.train_feature_store_dir_path
                 feature_store_file_name = self.utility_config.train_feature_store_file_name
 
             else:
