@@ -124,7 +124,11 @@ class ModelTrainEvaluate:
             raise e
 
     def initiate_model_training(self):
+
         try:
+
+            logging.info(">>>>>>> INITIATE MODEL TRAINING <<<<<<<")
+
             train_data = pd.read_csv(self.utility_config.train_dt_train_file_path+'/'+self.utility_config.train_file_name)
             test_data = pd.read_csv(self.utility_config.train_dt_test_file_path+'/'+self.utility_config.test_file_name)
 
@@ -132,6 +136,8 @@ class ModelTrainEvaluate:
             self.model_evaluation_report.to_csv("source/ml/model_evaluation_report.csv", index=False)
 
             self.retrain_final_model(train_data, test_data)
+
+            logging.info(">>>>>>> COMPLETE MODEL TRAINING <<<<<<<<")
 
             print('Model Training Done...')
 

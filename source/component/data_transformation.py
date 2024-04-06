@@ -18,6 +18,9 @@ class DataTransformation:
 
     def feature_encoding(self, data,  target, save_encoder_path = None, load_encoder_path = None, key = None):
         try:
+
+            logging.info("Start: Feature Encoding")
+
             for col in self.utility_config.dt_binary_class_col:
                 data[col] = data[col].map({'Manual': 1, 'Automatic': 0})
 
@@ -35,6 +38,8 @@ class DataTransformation:
                 data_encoded = encoder.transform(data[self.utility_config.dt_multi_class_col])
 
             data = pd.concat([data.drop(columns = self.utility_config.dt_multi_class_col), data_encoded], axis = 1)
+
+            logging.info("Complete: Feature Encoding")
 
             return data
 
@@ -75,6 +80,9 @@ class DataTransformation:
         return data
 
     def initiate_data_transformation(self, key):
+
+        logging.info(">>>>>>>> INITIATED DATA TRANSFORMATION <<<<<<")
+
         if key == 'train':
             train_data = import_csv_file(self.utility_config.train_file_name, self.utility_config.train_dv_train_file_path)
             test_data = import_csv_file(self.utility_config.test_file_name, self.utility_config.train_dv_test_file_path)
@@ -100,3 +108,5 @@ class DataTransformation:
             predict_data = self.min_max_scaling(predict_data, key='predict')
 
             export_data_csv(predict_data, self.utility_config.predict_file, self.utility_config.predict_dt_file_path)
+
+        logging.info(">>>>>> COMPLETE DATA TRANSFORMATION <<<<<<")

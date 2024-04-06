@@ -71,8 +71,6 @@ class DataIngestion:
                         data.drop(col, axis = 1, inplace = True)
                         drop_column.append(col)
 
-                logging.info(f"dropped columns : {drop_column}")
-
                 logging.info("Complete: clean data")
 
             return data
@@ -115,7 +113,7 @@ class DataIngestion:
 
         try:
 
-            logging.info("Start: Data Ingestion")
+            logging.info(">>>>>> INITIATED DATA INGESTION <<<<<<<")
 
             data = self.export_data_into_feature_store(key)
             data = self.process_data(data, key)
@@ -127,6 +125,7 @@ class DataIngestion:
                 export_data_csv(train_data, self.utility_config.train_file_name, self.utility_config.train_di_train_file_path)
                 export_data_csv(test_data, self.utility_config.test_file_name,self.utility_config.train_di_test_file_path)
 
-            logging.info("Complete: Data Ingestion")
+            logging.info(">>>>>>> COMPLETE DATA INGESTION <<<<<<<<")
+
         except CustomException as e:
             raise e

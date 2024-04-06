@@ -12,7 +12,11 @@ class DataValidation:
         self.outlier_params = {}
 
     def handle_missing_value(self, data, key):
+
         try:
+
+            logging.info("Start Handling Missing Values")
+
             if key == 'train':
 
                 numerical_columns = data.select_dtypes(include=['number']).columns
@@ -37,6 +41,8 @@ class DataValidation:
                 categorical_columns = data.select_dtypes(include=['object']).columns
                 data[categorical_columns] = data[categorical_columns].fillna(imputation_values[categorical_columns].iloc[0])
 
+            logging.info("Complete: Handling the missing values")
+
             return data
 
         except CustomException as e:
@@ -44,6 +50,9 @@ class DataValidation:
 
     def outlier_detection_handle(self, data, key):
         try:
+
+            logging.info("Start: Outlier Detection And Handling..")
+
             if key == 'train':
                 # Your existing outlier detection logic for the 'train' dataset
                 for column_name in data.select_dtypes(include=['number']).columns:
@@ -87,7 +96,10 @@ class DataValidation:
                             data.loc[outlier_mask_upper, column_name] = upper_bound
 
                 # Convert 'engine' column to integer, handling non-integer values gracefully
+
                 data['engine'] = data['engine'].astype(float).astype(int)
+
+            logging.info("Complete: Outlier detection and handling")
 
             return data
 
@@ -95,6 +107,8 @@ class DataValidation:
             raise e
 
     def initiate_data_validation(self, key):
+
+        logging.info(">>>>>>> INITIATED DATA VALIDATION <<<<<<<<<")
 
         if key == 'train':
 
@@ -117,3 +131,5 @@ class DataValidation:
             data = self.outlier_detection_handle(data, key='predict')
 
             export_data_csv(data, self.utility_config.predict_file, self.utility_config.predict_dv_file_path)
+
+        logging.info(">>>>>> COMPLETE DATA VALIDATION <<<<<<<")
