@@ -61,6 +61,9 @@ class ModelTrainEvaluate:
     def model_training(self, train_data, test_data):
 
         try:
+
+            logging.info("Start: Model Training")
+
             x_train = train_data.drop('selling_price', axis = 1)
             y_train = train_data['selling_price']
             x_test = test_data.drop('selling_price', axis = 1)
@@ -75,11 +78,16 @@ class ModelTrainEvaluate:
 
                 self.metrics_and_log(y_test, y_pred, name)
 
+            logging.info("Complete: Model Training")
+
         except CustomException as e:
             raise e
 
     def metrics_and_log(self, y_test, y_pred, model_name):
         try:
+
+            logging.info("Start: Model Evaluation")
+
             mse = mean_squared_error(y_test, y_pred)
             rmse = mean_squared_error(y_test, y_pred, squared=False)
             mae = mean_absolute_error(y_test, y_pred)
@@ -91,12 +99,16 @@ class ModelTrainEvaluate:
 
             self.model_evaluation_report = self.model_evaluation_report._append(pd.Series(new_row, index=self.model_evaluation_report.columns), ignore_index=True)
 
+
         except CustomException as e:
             print(e)
             raise e
 
     def retrain_final_model(self, train_data, test_data):
         try:
+
+            logging.info(">>>>>> Retraining the final Model <<<<<<<<")
+
             x_train = train_data.drop('selling_price', axis=1)
             y_train = train_data['selling_price']
 
@@ -119,6 +131,8 @@ class ModelTrainEvaluate:
             # Save the final model
             with open(f"{self.utility_config.final_model_path}/{final_model_name}.pkl", "wb") as f:
                 pickle.dump(final_model, f)
+
+            logging.info(">>>>>>>> Complete: Retrained Final Model <<<<<<<<<")
 
         except CustomException as e:
             raise e
