@@ -85,9 +85,6 @@ class ModelTrainEvaluate:
 
     def metrics_and_log(self, y_test, y_pred, model_name):
         try:
-
-            logging.info("Start: Model Evaluation")
-
             mse = mean_squared_error(y_test, y_pred)
             rmse = mean_squared_error(y_test, y_pred, squared=False)
             mae = mean_absolute_error(y_test, y_pred)
@@ -107,7 +104,7 @@ class ModelTrainEvaluate:
     def retrain_final_model(self, train_data, test_data):
         try:
 
-            logging.info(">>>>>> Retraining the final Model <<<<<<<<")
+            logging.info(">>>>>> Retraining the final Model <<<<<<<<") 
 
             x_train = train_data.drop('selling_price', axis=1)
             y_train = train_data['selling_price']
